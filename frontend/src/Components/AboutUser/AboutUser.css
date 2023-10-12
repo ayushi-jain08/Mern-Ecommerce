@@ -1,0 +1,143 @@
+.about-profile{
+    height: 100vh;
+    width: 100%;
+}
+.about-profile .container{
+    max-width: 700px;
+    margin: 30px auto;
+    background: whitesmoke;
+    box-shadow: inset 10px 10px 10px  -1px rgb(10, 99, 169, 0.16),
+    inset  -10px -10px  10px -1px rgb(229, 240, 251)
+    ;
+    padding:20px;  
+}
+.about-profile .content .top{
+    display: flex;
+    /* align-items: flex-start; */
+   gap: 20px;
+
+}
+.about-profile .top-left{
+    width: 200px;
+     background: #edf2f6;
+    box-shadow: inset 10px 10px 10px  -1px rgb(10, 99, 169, 0.16),
+    inset  -10px -10px  10px -1px rgb(255, 255, 255,0.70)
+    ;
+   border: 10px solid white;
+    height: 200px;
+    
+}
+.about-profile .top-left img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.about-profile .top-right{
+    width: 230px;
+    /* border: 2px solid purple; */
+    margin: -10px;
+}
+.about-profile .profile-head h2{
+    font-size: 25px;
+    font-weight: 600;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 5px;
+    text-transform: capitalize;
+}
+.about-profile .profile-head span{
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(22, 22, 182);
+}
+.about-profile .profile-head p{
+    font-size: 18px;
+    margin-top: 5px;
+}
+.profile-about h3{
+    font-size: 30px;
+    font-weight: 500;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 80px;
+}
+.about-profile .top-end{
+    margin-left: 100px;
+    width: 120px;
+   margin-top: 10px;
+   /* border: 2px solid rebeccapurple; */
+   
+}
+.about-profile .top-end button {
+    display: block;
+   margin: 0 auto;
+    color: white;
+    width: 100px;
+    text-decoration: none;
+    background: orangered;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 3px;
+    transition: all 0.4s;
+}
+.about-profile .top-end button:active{
+    /* background: white;
+    box-shadow:  10px 10px 10px  -1px rgb(10, 99, 169, 0.16),
+      -10px -10px  10px -1px rgb(255, 255, 255,0.30)
+    ;
+    border: 1px solid black;
+    color: black; */
+    background: rgb(255, 100, 44);
+    transform: scale(0.9);
+}
+.about-profile .profile-details{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about-profile .links{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.profile-details .details h5{
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 5px;
+    
+}
+.about-profile .links a{
+    color: gray;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+}
+.about-profile .ids{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 40px;
+    margin-right: 40px;
+}
+.about-profile .ids span{
+    font-size: 18px;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+}
+.about-profile .ids-details{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 40px;
+    margin-right: 100px;
+}
+.about-profile .ids-details span{
+    font-size: 18px;
+    color: black;
+   font-family: 'Times New Roman', Times, serif;
+}
+

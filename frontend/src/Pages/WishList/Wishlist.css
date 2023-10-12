@@ -1,0 +1,106 @@
+.wishlist-container{
+    width: 100%;
+    height: 100vh;
+}
+.wishlist-container .wishlist-banner {
+    width: 100%;
+    height: 300px;
+    position: relative;
+
+}
+.wishlist-container .wishlist-banner .img{
+    width: 100%;
+    height: 280px;
+    position: relative;
+}
+.wishlist-container .wishlist-banner .img::before{
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(71, 71, 120, 0.3);
+}
+.wishlist-container .wishlist-banner img{
+    width: 100%;
+    height: 100%;
+  object-fit: cover;
+}
+.wishlist-container .wishlist-banner h1{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 40px;
+    letter-spacing: 1px;
+}
+.wishlist-container .wishlist-main{
+    max-width: 1000px;
+    margin: 10px auto;
+}
+.wishlist-container .wishlist-header{
+    display: flex;
+    align-items: center;
+    padding: 3px 10px;
+    height: 40px;
+    background-color: rgb(253, 229, 233);
+    justify-content: space-between;
+    text-transform: capitalize;
+    color: black;
+    border-radius: 5px;
+}
+.wishlist-container .wishlist-header h2{
+    font-family: serif;
+    font-size: 20px;
+}
+.wishlist-main .content{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(198, 185, 185);
+}
+.wishlist-main .content .product{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.wishlist-main .content .product , .wishlist-header .product{
+    flex: 0.4;
+}
+.wishlist-main .content .price, .wishlist-header .price{
+    flex: 0.2;
+    text-align: center;
+   
+}
+.wishlist-main .content .qty, .wishlist-header .total{
+    flex: 0.2;
+    text-align: center;
+}
+.wishlist-main, .content .total, .wishlist-header .delete{
+    flex: 0.1;
+    text-align: center;
+}
+.wishlist-main .content .add-btn{
+    width: 100px;
+    padding: 10px 5px;
+    font-size: 14px;
+    border: 0;
+    border-radius: 10px;
+    border:  1px solid transparent;
+    background: orangered;
+    color: white;
+}
+.wishlist-main .content .remove-btn{
+    border: none;
+background: transparent;
+outline: none;
+}
+.wishlist-main .content .remove-btn .del{
+    color: red;
+    font-size: 25px;
+}
+.wishlist-main .content .remove-btn .del:active{
+    transform: scale(1.1);
+}

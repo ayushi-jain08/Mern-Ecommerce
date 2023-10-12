@@ -1,0 +1,217 @@
+body{
+    overflow-x: hidden;
+}
+.single-product {
+  background-color: rgb(241, 240, 240);
+  width: 100%;
+  /* height: fit-content; */
+  padding: 10px;
+}
+.single-product .sub-single {
+  max-width: 1100px;
+  margin: 0px auto;
+  background: white;
+  padding: 10px;
+  height: fit-content;
+  border: 2px solid rgb(234, 230, 230);
+  border-radius: 5px;
+  box-shadow: 0px 5px 5px rgb(209, 207, 207);
+  display: flex;
+  gap: 3px;
+}
+.single-product .sub-single .left {
+  margin: 15px;
+  border-radius: 3px;
+  padding: 5px 10px;
+  flex: 0.5;
+  
+}
+.sub-single .left .img-wrapper{
+    height:1000px;
+}
+.sub-single .left .img-wrapper .big-img {
+  width: 90%;
+  height: 480px;
+  object-fit: cover;
+  padding: 20px 30px;
+  border: 1px solid rgb(225, 216, 216);
+  padding: 20px;
+}
+.sub-single .left .big-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sub-single .left .small-img{
+    width: 97%;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.Iactive{
+  border: 5px solid rgb(247, 63, 63);
+}
+.sub-single .left .img-wrapper .small-img  img{
+    border: 1px solid rgb(225, 216, 216);
+   padding: 20px;
+   width: 200px;
+   height: 180px;
+   object-fit: cover;
+   margin-top: 10px;
+}
+.single-product .sub-single .right {
+  padding-right: 30px;
+  flex: 0.5;
+}
+.single-product .right .content{
+    border-bottom: 1px solid rgb(210, 209, 209);
+}
+.sub-single .right .content h2 {
+  margin-top: 15px;
+  padding-bottom: 7px;
+  font-size: 16px;
+  font-weight: 700;
+  border-bottom: 1px solid rgb(210, 209, 209);
+}
+.right .content .price {
+  font-size: 22px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: -20px;
+}
+.right .content .price strike{
+  font-size: 13px;
+  color: gray;
+}
+.right .content .icons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: -20px;
+}
+.right .content .icons .star .filled-star {
+  color: rgb(255, 218, 6);
+  font-size: 20px;
+  margin-top: 13px;
+}
+.right .content .icons .star .empty-star {
+  color: rgb(188, 179, 179);
+  font-size: 20px;
+  margin-top: 13px;
+}
+
+.right .content .icons .rating {
+  color: gray;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+.right .content .brand,
+.category,
+.desc,
+.stock {
+  color: rgb(162, 157, 157);
+  font-weight: 600;
+}
+.right .content .qty{
+    display: flex;
+    align-items: center;
+gap: 7px;
+    margin-top: -14px;
+    font-size: 18px;
+}
+.right .lower-content .heart{
+display: flex;
+align-items: center;
+gap: 3px;
+}
+.right .lower-content .heart p{
+    color: rgb(9, 9, 65);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 17px;
+}
+.right .lower-content .heart .icon{
+    color: rgb(204, 194, 194);
+    
+}
+.right .lower-content .heart .red{
+    color: red; 
+    transform: scale(1.1);
+
+}
+.right .lower-content .heart .white{
+  color: rgb(188, 182, 182);
+}
+.right .accor{
+    margin-top: 30px;
+}
+.lower-content .btn button {
+    width: 140px;
+    padding: 10px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 25px;
+    border:  1px solid transparent;
+}
+.lower-content .btn .add{
+    background-color: rgb(8, 8, 58);
+    color: white;
+}
+.lower-content .btn .add:active{
+    background: white;
+    color: rgb(8, 8, 46);
+    border: 1px solid black;
+    transition: all 0.3s ;
+}
+
+.lower-content .btn .buy{
+    background: orange;
+margin-left: 10px;
+color: rgb(8, 8, 45);
+}
+.lower-content .btn .buy:active{
+    background: white;
+    color: rgb(8, 8, 46);
+    border: 1px solid black;
+    transition: all 0.3s ;
+}
+.single-product .review{
+max-width: 1100px;
+margin: 20px auto;
+background: white;
+height: fit-content;
+border: 2px solid rgb(234, 230, 230);
+border-radius: 5px;
+box-shadow: 0px 5px 5px rgb(209, 207, 207);
+}
+/* ===================RELATED PRODUCT======================== */
+.related{
+  max-width: 1100px ;
+  margin: 10px auto;
+}
+.related h2{
+  font-size: 30px;
+  font-weight: 700;
+  position: relative;
+}
+.related h2::after{
+  content: "";
+  height: 3px;
+  border-radius: 3px;
+  width: 100px;
+  background: rgb(81, 29, 22);
+  position: absolute;
+  top: 45px;
+  left: 0;
+}
+.related .product{
+  display: flex;
+  gap: 17px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+

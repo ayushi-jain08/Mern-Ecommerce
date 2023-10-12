@@ -1,0 +1,152 @@
+.carts{
+    background-color: rgb(241, 240, 240);
+    width: 100%;
+    height: fit-content;
+}
+.carts .sub-cart{
+    max-width: 1100px;
+    margin: 0px auto;
+    height: 100vh;
+    padding: 10px; 
+}
+.sub-cart .header{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid rgb(194, 191, 191);
+    justify-content: space-between;
+    text-transform: capitalize;
+}
+.sub-cart .header h2{
+    font-size: 15px;
+    font-weight: 500;
+color: gray;
+text-transform: uppercase;
+}
+.header .product, .content .product{
+    flex: 0.4;
+}
+.header .price , .content .price{
+    flex: 0.1;
+}
+.header .qty, .content .qty{
+    flex: 0.1;
+}
+.header .total, .content .total{
+    flex: 0.2;
+    text-align: center;
+}
+.header .delete, .content .delete{
+    flex: 0.1;
+    text-align: center;
+}
+.sub-cart .content{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    justify-content: space-between;
+    border:  1px solid rgb(6, 6, 56);
+    /* border: 2px solid rebeccapurple; */
+}
+.sub-cart .content .product{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.content .product .details{
+    margin-top: 5px;
+    width: 60%;
+    /* border: 2px solid rebeccapurple; */
+}
+.product .details p{
+    margin: 5px;
+    color: gray;
+    font-weight: 600;
+    font-size: 14px;
+}
+.content .qty .item{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 20px;
+}
+.content .delete .del{
+    color: red;
+    font-size: 25px;
+}
+.sub-cart .bottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+.sub-cart .bottom .continue{
+    width: 150px;
+    padding: 10px;
+    background: rgb(9, 9, 48);
+    color: white;
+    font-size: 14px;
+    border: 0;
+    border-radius: 20px;
+}
+.sub-cart .bottom .clear{
+    width: 120px;
+    padding: 10px;
+    background: orangered;
+    color: white;
+    font-size: 15px;
+    border: 0;
+    border-radius: 20px;
+}
+.sub-cart .subtotal{
+    float: right;
+    margin-top: 20px;
+    font-size: 15px;
+    color: gray;
+    font-weight: 600;
+}
+.sub-cart .subtotal button{
+    width: 270px;
+    padding: 10px;
+    background: rgb(9, 9, 48);
+    color: white;
+    font-size: 14px;
+    border: 0;
+    border-radius: 20px;
+}
+.carts .empty{
+    width: 100%;
+    height: 100%;
+    background: white;
+    position: relative;
+}
+.carts .empty img{
+    width: 500px;
+    height: 400px;
+    display: block;
+    margin: 30px auto;
+}
+.carts .empty p{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translateX(-50%);
+font-size: 30px;
+font-weight: 700;
+color: rgb(58, 56, 56);
+text-shadow: 5px 5px 5px gray;
+}
+.carts .empty button{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    padding: 10px;
+    background: rgb(9, 9, 48);
+    color: white;
+    font-size: 14px;
+    border: 0;
+    border-radius: 10px;
+}
