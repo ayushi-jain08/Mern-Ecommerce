@@ -14,8 +14,7 @@ const SubcategoryProduct = () => {
     dispatch(clearSubCategoryProduct())
     dispatch(fetchSucategoryProduct(subcategoryId))
    },[dispatch, subcategoryId])
-   console.log("kkkk",SubCategoryProduct)
-   console.log("ll", subcategoryId)
+   
   return (
     <>
    <div className="sub-category-card">

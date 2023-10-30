@@ -6,26 +6,24 @@ import RemoveCircleSharpIcon from "@mui/icons-material/RemoveCircleSharp";
 import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
 import { useDispatch, useSelector } from "react-redux";
 import { RemoveCartProduct, fetchCartProduct, fetchUpdateCartQty } from "../../../ReduxToolkit/Slices/ProductSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import EmptyCart from "./EmptyCart";
+
 
 const Cart = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const userdata = useSelector((state) => state.user)
-  const {loggedIn} = userdata
+  const {loggedIn, userInfo} = userdata
   const cartDetails = useSelector((state) => state.products )
   const {cartProductInfo, laoding, error} = cartDetails
   useEffect(() => {
-  if(!loggedIn){
+  if(userInfo === ""){
 navigate("/login")
-
   }
-  console.log("cart", cartProductInfo)
   dispatch(fetchCartProduct())
   },[dispatch])
-  console.log("cart",cartProductInfo)
   const handleQuantitychange = async(productId, operation) => {
   try {
   await  dispatch(fetchUpdateCartQty({productId, operation}))
@@ -34,9 +32,9 @@ navigate("/login")
     console.log(error)
   }
   }
-  const handleDelete = (productId) => {
-dispatch(RemoveCartProduct(productId))
-dispatch(fetchCartProduct())
+  const handleDelete = async(productId) => {
+ await dispatch(RemoveCartProduct(productId))
+await dispatch(fetchCartProduct())
   }
 
   const totalSubtotal = cartProductInfo.reduce((accumulator, cartItem) => {
@@ -44,7 +42,6 @@ dispatch(fetchCartProduct())
     return accumulator + itemSubtotal;
    
   }, 0);
- 
   return (
     <>
       <div className="carts">
@@ -61,11 +58,13 @@ dispatch(fetchCartProduct())
           const {longTitle,brand, cost, images, _id  } = item.product
           return(
             <>
-             <div className="content">
+             <div className="content" key={_id}>
             <div className="product">
               <img src={images[0]} alt="" width={70} height={70} />
               <div className="details">
-                <p>{longTitle}</p>
+              <Link to={`/product/${_id}`}>
+              <p>{longTitle}</p>
+              </Link>
                 <p>Size: S</p>
                 <p>Brand: {brand}</p>
               </div>
@@ -88,25 +87,28 @@ dispatch(fetchCartProduct())
               <p style={{ fontWeight: 600, fontSize: "16px" }}>${item.subtotal}</p>
             </div>
             <div className="delete">
-              <span onClick={() => handleDelete(_id)}>
+              <button onClick={() => handleDelete(_id)}>
                 <DeleteSharpIcon className="del" />
-              </span>
+              </button>
             </div>
           </div>
           </>
           )
         })}
           <div className="bottom">
-           <button className="continue">Continue Shopping</button>
+          <NavLink to="/product">
+          <button className="continue">Continue Shopping</button>
+          </NavLink>
            <button className="clear">Clear Cart</button>
           </div>
           <div className="subtotal">
             <p style={{float:'right'}}>Subtotal: ${totalSubtotal}</p>
             <br />
             <p style={{clear:'both'}}>Taxes & Shipping calulated at Checkout</p>
-            <button >Check Out</button>
+           <NavLink to="/shipping">
+           <button className="shipping-btn">Check Out</button>
+           </NavLink>
           </div>
-          
          </div>: <EmptyCart/>}
         </div>
    

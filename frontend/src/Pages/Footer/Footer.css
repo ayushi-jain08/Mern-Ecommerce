@@ -1,0 +1,74 @@
+.footer{
+    width: 100%;
+    height: 350px;
+    background-color: rgb(24, 24, 54);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    bottom: 0;
+}
+.footer .footer-img{
+    width: 100px;
+    height: 100px;
+}
+.footer .upper-footer-head{
+    display: flex;
+    gap: 20px;
+}
+.footer .upper-footer-head p{
+    color: white;
+    text-transform: uppercase;
+    margin-top: 0;
+    font-family: serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+.footer .footer-icons{
+    display: flex;
+    gap: 15px;
+} 
+.footer .divider{
+    width: 100%;
+    height: 1px;
+    background: gray;
+}
+.footer .footer-subhead ul{
+display: flex;
+gap: 20px;
+align-items: center;
+}
+.footer .footer-subhead ul li {
+    padding: 5px 10px;
+    list-style: none;
+    cursor: pointer;
+}
+.footer .footer-subhead ul li a{
+    font-size: 15px;
+    font-weight: 500;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+}
+.footer .footer-icons p{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.footer .footer-icons p svg{
+    font-size: 30px;
+    color: rgb(8, 9, 62); 
+}
+.footer .footer-bottom{
+    font-size: 15px;
+    text-align: center;
+    color: rgb(192, 185, 185);
+    width: 350px;
+    margin-top: 30px;
+
+}

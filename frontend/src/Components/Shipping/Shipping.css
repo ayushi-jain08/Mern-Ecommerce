@@ -1,0 +1,65 @@
+.shipping-cont{
+    max-width: 900px;
+    margin: 15px auto;
+}
+.shipping-cont .shipping-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+}
+.shipping-cont .shipping-box .shippingHeading{
+    font-size: 25px;
+    font-weight: 400;
+    color: black;
+    font-family: serif;
+    padding: 7px  15px;
+    border-bottom: 2px solid rgb(217, 217, 216);
+    margin-top: 15px;  
+}
+
+.shipping-cont .shipping-box .form{
+    width: 45%;
+}
+.shipping-cont .shipping-box .form-control{
+    width: 90%;
+    border: 1px solid black;
+    padding: 7px 10px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-sizing: border-box;
+    background: white;
+}
+.shipping-cont .shipping-box .form-control input{
+    border: none;
+    outline: none; 
+    background: white; 
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    border-radius: 5px;
+}
+.shipping-cont .shipping-box .form-control select{
+    border: none;
+    outline: none;  
+    width: 90%;
+}
+.shipping-cont .shipping-box .form .shipping-btn{
+    padding: 10px ;
+    box-sizing: border-box;
+    width: 100px;
+    background: orangered;
+    color: white;
+    font-size: 18px;
+    border: 0;
+    border-radius: 0px;
+   width: 90%;
+   margin-top: 20px;
+}
+.shipping-cont .shipping-box .form .shipping-btn:active{
+    transform: scale(1.077);
+    background:rgb(248, 116, 68) ;
+}

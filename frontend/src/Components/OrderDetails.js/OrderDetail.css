@@ -1,0 +1,80 @@
+.single-order{
+    width: 100%;
+    height: fit-content;
+}
+.single-order .single-sub-order{
+    max-width: 1100px;
+    margin: 20px auto;
+}
+.single-order .single-sub-order .shipping-info .confirm-shipping-info{
+padding: 0 15px;
+}
+.single-order .single-sub-order .shipping-info .confirm-shipping-info > div{
+    margin-bottom: 0;
+    display: flex;
+    gap: 7px;
+}
+.single-order .single-sub-order .shipping-info .confirm-shipping-info > div p{
+    font-size:20px ;
+    font-weight: 600;
+    font-family: serif;
+    margin-top: 5px;
+}
+.single-order .single-sub-order .shipping-info .confirm-shipping-info > div span{
+    font-size: 16px;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    margin-top: 10px;
+    
+}
+.single-order .single-sub-order .payment-order-info{
+    padding: 0 15px;
+}
+.single-order .single-sub-order .payment-order-info > div{
+    display: flex;
+    margin-top: 0;
+    align-items: center;
+}
+.single-order .single-sub-order .order-status .greenColor{
+    padding: 0 15px;
+    font-size: 20px;
+    color: green;
+}
+.single-order .single-sub-order .order-status .redColor {
+    padding: 0 15px;
+    font-size: 18px;
+    color: red;
+}
+.single-order .order-item{
+    max-width: 1100px;
+    margin: 20px auto;
+}
+.single-order .order-item .order-confirmitems-container{
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    height: 100%;
+}
+.single-order .order-item .order-confirmitems-container .full-order-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    box-sizing: border-box;
+    padding: 5px 15px; 
+    margin-bottom: 20px;
+   
+}
+.single-order .order-item .order-confirmitems-container .full-order-details .details-order{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.single-order .order-item .order-confirmitems-container .full-order-details .details-order img{
+    width: 70px;
+    height: 70px;
+}
+.single-order .order-item .order-confirmitems-container .full-order-details span{
+    color: rgb(139, 136, 136);
+    font-family: sans-serif;
+}

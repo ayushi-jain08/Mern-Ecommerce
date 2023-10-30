@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchAllProduct = createAsyncThunk(
-  'data/fetchAllProduct',
-  async ({ page, sort, brand }) => {
+  "data/fetchAllProduct",
+  async ({ page, sort, brand, category }) => {
     try {
       const response = await fetch(
-        `http://localhost:6001/api/getproduct?page=${page}&sort=${sort}&brand=${brand}`,
+        `http://localhost:6001/api/getproduct?page=${page}&sort=${sort}&brand=${brand}&category=${category}`,
         {
           method: "GET",
           mode: "cors",
@@ -31,39 +31,473 @@ export const fetchAllProduct = createAsyncThunk(
   }
 );
 // =======================GET SINGLE PRODUCT======================
-export const fetchSingleProduct = createAsyncThunk('data/fetchSingleProduct', async(id,thunkAPI) => {
-try {
-    const response = await fetch(`http://localhost:6001/api/getproduct/${id}`, {
+export const fetchSingleProduct = createAsyncThunk(
+  "data/fetchSingleProduct",
+  async (id, thunkAPI) => {
+    try {
+      const response = await fetch(
+        `http://localhost:6001/api/getproduct/${id}`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json", // Fix the header syntax
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while fetching user profile.");
+    }
+  }
+);
+//  ==============ADD TO CARTS======================
+export const AddToCart = createAsyncThunk(
+  "data/AddToCart",
+  async ({ productId, quantity }) => {
+    try {
+      const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
+      const response = await fetch("http://localhost:6001/api/addtocart", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${StoredUserInfo.token}`,
+        },
+        body: JSON.stringify({ productId, quantity }), // Use the correct parameter name here
+      });
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
+
+// ======================GET CART PRODUCT==========================
+export const fetchCartProduct = createAsyncThunk(
+  "data/fetchCartData",
+  async (_, thunkAPI) => {
+    try {
+      const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
+      const response = await fetch("http://localhost:6001/api/getcart", {
         method: "GET",
         mode: "cors",
         headers: {
-          "Content-Type": "application/json", // Fix the header syntax
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${StoredUserInfo.token}`,
         },
-    })
-    const data = await response.json()
-    if(response.ok){
+      });
+      const data = await response.json();
+      if (response.ok) {
         return data;
-    }else{
+      } else {
         throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
     }
+  }
+);
+// ======================UPDATE CART QUANTITY=======================
+export const fetchUpdateCartQty = createAsyncThunk(
+  "data/fetchUpdateCartQty",
+  async ({ productId, operation }) => {
+    try {
+      const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
+      const response = await fetch("http://localhost:6001/api/updatecart", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${StoredUserInfo.token}`,
+        },
+        body: JSON.stringify({ productId, operation }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
 
-} catch (error) {
-    throw new Error("An error occurred while fetching user profile.");
-}
-})
-//  ==============ADD TO CARTS======================
-export const AddToCart = createAsyncThunk('data/AddToCart', async ({ productId, quantity }) => {
+// ===========================DELETE PRODUCTS FROM CART=====================
+export const RemoveCartProduct = createAsyncThunk(
+  "data/RemoveCartProduct",
+  async (productId) => {
+    try {
+      const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
+      const response = await fetch("http://localhost:6001/api/deletecart", {
+        method: "DELETE",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${StoredUserInfo.token}`,
+        },
+        body: JSON.stringify({ productId }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
+
+// ========================ADD TO WISHLIST===================
+export const AddToWishList = createAsyncThunk(
+  "data/AddToWishList",
+  async (productId) => {
+    try {
+      const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
+      const response = await fetch("http://localhost:6001/api/addtowishlist", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${StoredUserInfo.token}`,
+        },
+        body: JSON.stringify({ productId }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An  while processing your request.");
+    }
+  }
+);
+//  ========================GET WISHLIST PRODUCT======================
+export const fetchWishListItem = createAsyncThunk(
+  "data/fetchWishListItem",
+  async (_, thunkAPI) => {
+    try {
+      const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
+      const response = await fetch("http://localhost:6001/api/getwishlist", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${StoredUserInfo.token}`,
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
+// ======================POST REVIEW=======================
+export const fetchPostReview = createAsyncThunk(
+  "data/fetchPostReview",
+  async ({ productId, rating, comment }) => {
+    try {
+      const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
+      const response = await fetch(
+        `http://localhost:6001/api/product/${productId}/review`,
+        {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${StoredUserInfo.token}`,
+          },
+          body: JSON.stringify({ rating, comment }),
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
+
+// =========================GET REVIEW=============================
+export const fetchGetReview = createAsyncThunk(
+  "data/fetchGetReview ",
+  async (productId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:6001/api/product/${productId}/getreview`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
+
+// ==================EDIT REVIEW======================
+export const fetchEditReview = createAsyncThunk(
+  "data/fetchEditReview",
+  async ({ reviewId, updatedReviewData }) => {
+    try {
+      const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
+      const response = await fetch(
+        `http://localhost:6001/api/${reviewId}/review`,
+        {
+          method: "PATCH",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${StoredUserInfo.token}`,
+          },
+          body: JSON.stringify(updatedReviewData),
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
+
+// ============================DELETE REVIEW==========================
+export const fetchDeleteReview = createAsyncThunk(
+  "data/fetchDeleteReview",
+  async (reviewId) => {
+    try {
+      const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
+      const response = await fetch(
+        `http://localhost:6001/api/${reviewId}/review`,
+        {
+          method: "DELETE",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${StoredUserInfo.token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        return reviewId;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
+
+// ==========================GET CATEGORIES=========================
+export const fetchGetCategory = createAsyncThunk(
+  "data/fetchGetCategory",
+  async () => {
+    try {
+      const response = await fetch("http://localhost:6001/api/categories", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
+
+// ====================GET SUBCATEGORY======================
+export const fetchSubCategory = createAsyncThunk(
+  "data/fetchSubCategory ",
+  async (categoryId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:6001/api/categories/${categoryId}`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
+
+// =================GET SUBCATEGORY PRODUCT=====================
+export const fetchSucategoryProduct = createAsyncThunk(
+  "data/fetchSucategoryProduct",
+  async (subcategoryID) => {
+    try {
+      const response = await fetch(
+        `http://localhost:6001/api/subcategory/${subcategoryID}`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
+// =====================GET RELATED PRODUCT=====================
+export const fetchRelatedProduct = createAsyncThunk(
+  "data/fetchRelatedProducts",
+  async (productId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:6001/api/related-product/${productId}`,
+        {
+          method: "GET",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
+export const fetchAllSubCategory = createAsyncThunk(
+  "data/fetchAllSubCategory ",
+  async () => {
+    try {
+      const response = await fetch("http://localhost:6001/api/subcategories", {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An error occurred while processing your request.");
+    }
+  }
+);
+// =================CREATE ORDER=================================
+export const CreateOrder = createAsyncThunk(
+  "data/CreateOrder",
+  async ({
+    shippingInfo, orderItems, paymentInfo, itemsPrice, taxPrice, shippingPrice,totalPrice
+  }) => {
+    try {
+      const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
+      const response = await fetch("http://localhost:6001/api/create/order", {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${StoredUserInfo.token}`,
+        },
+        body: JSON.stringify({ shippingInfo,orderItems, paymentInfo, itemsPrice, taxPrice, shippingPrice,totalPrice }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        return data;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      throw new Error("An  while processing your request.");
+    }
+  }
+);
+
+// ===================GET ALL ORDERS==========================
+export const FetchAllOrders = createAsyncThunk("data/FetchAllOrders", async() => {
+  const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
   try {
-    const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
-    const response = await fetch("http://localhost:6001/api/addtocart", {
-      method: 'POST',
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${StoredUserInfo.token}`,
-      },
-      body: JSON.stringify({ productId, quantity }) // Use the correct parameter name here
-    });
+    const response = await fetch(
+      `http://localhost:6001/api/get/orders`,
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${StoredUserInfo.token}`,
+        },
+      }
+    );
     const data = await response.json();
     if (response.ok) {
       return data;
@@ -73,324 +507,34 @@ export const AddToCart = createAsyncThunk('data/AddToCart', async ({ productId, 
   } catch (error) {
     throw new Error("An error occurred while processing your request.");
   }
-});
-
-// ======================GET CART PRODUCT==========================
-export const fetchCartProduct = createAsyncThunk('data/fetchCartData', async(_,thunkAPI) => {
+})
+// =======================GET SINGLE ORDER=======================
+export const GetSingleOrder = createAsyncThunk("data/GetSingleOrder", async(id) => {
   try {
     const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
-    const response = await fetch("http://localhost:6001/api/getcart", {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${StoredUserInfo.token}`,
+    const response = await fetch(
+      `http://localhost:6001/api/order/${id}`,
+      {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${StoredUserInfo.token}`,
+        },
       }
-    })
-    const data = await response.json()
-    if(response.ok){
+    );
+    const data = await response.json();
+    if (response.ok) {
       return data;
-    }else{
+    } else {
       throw new Error(data.message);
     }
-  } catch (error) {
-    throw new Error("An error occurred while processing your request.");
-  }
-});
-// ======================UPDATE CART QUANTITY=======================
-export const fetchUpdateCartQty = createAsyncThunk('data/fetchUpdateCartQty', async({productId, operation}) => {
-  try {
-    const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
-    const response = await fetch("http://localhost:6001/api/updatecart", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${StoredUserInfo.token}`,
-      },
-      body: JSON.stringify({productId,operation})
-    })
-    const data = await response.json()
-    if(response.ok){
-      return data;
-    }else{
-      throw new Error(data.message);
-    }
-  } catch (error) {
-    throw new Error("An error occurred while processing your request.");
-  }
-})
-
-// ===========================DELETE PRODUCTS FROM CART=====================
-export const RemoveCartProduct = createAsyncThunk('data/RemoveCartProduct', async(productId) => {
-try {
-  const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
-  const response = await fetch("http://localhost:6001/api/deletecart",{
-    method: "DELETE",
-    mode: "cors",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${StoredUserInfo.token}`,
-    },
-    body: JSON.stringify({productId})
-  })
-  const data = await response.json()
-  if(response.ok){
-    return data;
-  }else{
-    throw new Error(data.message);
-  }
-} catch (error) {
-  throw new Error("An error occurred while processing your request.");
-}
-})
-
-// ========================ADD TO WISHLIST===================
-export const AddToWishList = createAsyncThunk('data/AddToWishList', async(productId) => {
-  try {
-    const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
-    const response = await fetch("http://localhost:6001/api/addtowishlist", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${StoredUserInfo.token}`,
-      },
-      body: JSON.stringify({productId})
-    })
-    const data = await response.json()
-  if(response.ok){
-    return data;
-  }else{
-    throw new Error(data.message);
-  }
-  } catch (error) {
-    throw new Error("An  while processing your request.");
-  }
-})
-//  ========================GET WISHLIST PRODUCT======================
-export const fetchWishListItem = createAsyncThunk("data/fetchWishListItem", async(_,thunkAPI) => {
-  try {
-    const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
-    const response = await fetch("http://localhost:6001/api/getwishlist", {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${StoredUserInfo.token}`,
-      }
-    })
-    const data = await response.json()
-    if(response.ok){
-      return data
-    }else{
-      throw new Error(data.message);
-    }
-  } catch (error) {
-    throw new Error("An error occurred while processing your request.");
-  }
-})
-// ======================POST REVIEW=======================
-export const fetchPostReview = createAsyncThunk("data/fetchPostReview", async({productId,rating,comment}) => {
-  try {
-    const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
-    const response = await fetch(`http://localhost:6001/api/product/${productId}/review`, {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${StoredUserInfo.token}`,
-      },
-      body : JSON.stringify({rating, comment})
-    })
-    const data = await response.json()
-    if(response.ok){
-      return data;
-    }else{
-      throw new Error(data.message);
-    }
-  } catch (error) {
-    throw new Error("An error occurred while processing your request.");
-  }
-})
-
-// =========================GET REVIEW=============================
-export const fetchGetReview = createAsyncThunk("data/fetchGetReview ", async(productId) => {
-  try {
-    const response = await fetch(`http://localhost:6001/api/product/${productId}/getreview`, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    const data = await response.json()
-    if(response.ok){
-      return data;
-    }else{
-      throw new Error(data.message);
-    }
-  } catch (error) {
-    throw new Error("An error occurred while processing your request.");
-  }
-})
-
-// ==================EDIT REVIEW======================
-export const fetchEditReview = createAsyncThunk('data/fetchEditReview', async({reviewId, updatedReviewData}) => {
-try {
-  const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
-  const response = await fetch(`http://localhost:6001/api/${reviewId}/review`, {
-    method: "PATCH",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${StoredUserInfo.token}`,
-      },
-      body: JSON.stringify(updatedReviewData)
-  })
-  const data = await response.json()
-    if(response.ok){
-      return data
-    }else{
-      throw new Error(data.message)
-  }
-} catch (error) {
-  throw new Error("An error occurred while processing your request.");
-}
-})
-
-// ============================DELETE REVIEW==========================
-export const fetchDeleteReview = createAsyncThunk("data/fetchDeleteReview", async(reviewId) => {
-  try {
-    const StoredUserInfo = JSON.parse(localStorage.getItem("userDataInfo"));
-    const response = await fetch(`http://localhost:6001/api/${reviewId}/review`, {
-      method: "DELETE",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${StoredUserInfo.token}`,
-      },
-    })
-    const data = await response.json()
-    if(response.ok){
-      return reviewId
-    }
-    else{
-      throw new Error(data.message)
-  }
-  } catch (error) {
-    throw new Error("An error occurred while processing your request.");
-  }
-})
-
-// ==========================GET CATEGORIES=========================
-export const fetchGetCategory = createAsyncThunk("data/fetchGetCategory", async() => {
-  try {
-    const response = await fetch("http://localhost:6001/api/categories", {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    const data = await response.json()
-    if(response.ok){
-      return data
-    }
-    else{
-      throw new Error(data.message)
-  }
-  } catch (error) {
-    throw new Error("An error occurred while processing your request.");
-  }
-})
-
-// ====================GET SUBCATEGORY======================
-export const fetchSubCategory = createAsyncThunk("data/fetchSubCategory ", async(categoryId) => {
-  try {
-    const response = await fetch(`http://localhost:6001/api/categories/${categoryId}`, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    const data = await response.json()
-    if(response.ok){
-      return data
-    }
-    else{
-      throw new Error(data.message)
-  }
-  } catch (error) {
-    throw new Error("An error occurred while processing your request.");
-  }
-})
-
-// =================GET SUBCATEGORY PRODUCT=====================
-export const fetchSucategoryProduct = createAsyncThunk("data/fetchSucategoryProduct", async(subcategoryID) => {
-try {
-  const response = await fetch(`http://localhost:6001/api/subcategory/${subcategoryID}`, {
-    method: "GET",
-    mode: "cors",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-  const data = await response.json()
-  if(response.ok){
-    return data
-  }
-  else{
-    throw new Error(data.message)
-}
-} catch (error) {
-  throw new Error("An error occurred while processing your request.");
-}
-})
-// =====================GET RELATED PRODUCT=====================
-export const fetchRelatedProduct = createAsyncThunk("data/fetchRelatedProducts", async(productId) => {
-  try {
-    const response = await fetch(`http://localhost:6001/api/related-product/${productId}`, {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    const data = await response.json()
-    if(response.ok){
-      return data
-    }
-    else{
-      throw new Error(data.message)
-  } 
-  } catch (error) {
-    throw new Error("An error occurred while processing your request.");
-  }
-})
-export const fetchAllSubCategory = createAsyncThunk("data/fetchAllSubCategory ", async() => {
-  try {
-    const response = await fetch('http://localhost:6001/api/subcategories' , {
-      method: "GET",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    const data = await response.json()
-    if(response.ok){
-      return data
-    }
-    else{
-      throw new Error(data.message)
-  } 
   } catch (error) {
     throw new Error("An error occurred while processing your request.");
   }
 })
 const initializeWishlistFromLocalStorage = () => {
-  const wishlistData = localStorage.getItem('wishlist');
+  const wishlistData = localStorage.getItem("wishlist");
   return wishlistData ? JSON.parse(wishlistData) : [];
 };
 const initialState = {
@@ -409,6 +553,11 @@ const initialState = {
   SubCategoryProduct: [],
   relatedProduct: [],
   allSubcategory: [],
+  allOrders:[],
+  SingleOrder:[],
+  shippingInfo: JSON.parse(localStorage.getItem("shippingInfo"))
+    ? JSON.parse(localStorage.getItem("shippingInfo"))
+    : {},
   loading: false,
   error: null,
 };
@@ -419,6 +568,10 @@ const ProductSlice = createSlice({
   reducers: {
     clearSubCategoryProduct: (state) => {
       state.SubCategoryProduct = [];
+    },
+    saveShippingInfo: (state, action) => {
+      state.shippingInfo = action.payload;
+      localStorage.setItem("shippingInfo", JSON.stringify(state.shippingInfo));
     },
   },
   extraReducers: (builder) => {
@@ -439,40 +592,40 @@ const ProductSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(fetchSingleProduct.pending, (state) => {
-        state.loading = true
-        state.error = null
+        state.loading = true;
+        state.error = null;
       })
-      .addCase(fetchSingleProduct.fulfilled, (state,action) => {
-        state.loading = false
-        state.singleProduct = action.payload
+      .addCase(fetchSingleProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.singleProduct = action.payload;
       })
-      .addCase(fetchSingleProduct.rejected, (state,action) => {
-        state.loading = false
+      .addCase(fetchSingleProduct.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.error.message;
       })
       .addCase(AddToCart.pending, (state) => {
-        state.loading = true
-        state.error = null
+        state.loading = true;
+        state.error = null;
       })
-      .addCase(AddToCart.fulfilled, (state,action) => {
-        state.loading = false
-       state.addProduct.push(action.payload)
+      .addCase(AddToCart.fulfilled, (state, action) => {
+        state.loading = false;
+        state.addProduct.push(action.payload);
       })
-      .addCase(AddToCart.rejected, (state,action) => {
-        state.loading = false
+      .addCase(AddToCart.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.error.message;
       })
       .addCase(fetchCartProduct.pending, (state) => {
-        state.loading = true
+        state.loading = true;
         state.error = null;
       })
-      .addCase(fetchCartProduct.fulfilled, (state,action) => {
-        state.loading = false
+      .addCase(fetchCartProduct.fulfilled, (state, action) => {
+        state.loading = false;
         state.cartProductInfo = action.payload;
       })
-      .addCase(fetchCartProduct.rejected, (state,action) => {
-        state.loading =false
-        state.error = action.error.message
+      .addCase(fetchCartProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       })
       .addCase(fetchUpdateCartQty.pending, (state) => {
         state.loading = true;
@@ -481,12 +634,12 @@ const ProductSlice = createSlice({
       .addCase(fetchUpdateCartQty.fulfilled, (state, action) => {
         state.loading = false;
         // Find the cart item by productId and update its quantity
-        const updatedCartItems = state.cartProductInfo.map(item => {
+        const updatedCartItems = state.cartProductInfo.map((item) => {
           if (item.product._id === action.payload.productId) {
             return {
               ...item,
               quantity:
-                action.payload.operation === 'increase'
+                action.payload.operation === "increase"
                   ? item.quantity + 1
                   : item.quantity - 1,
             };
@@ -506,63 +659,67 @@ const ProductSlice = createSlice({
       .addCase(RemoveCartProduct.fulfilled, (state, action) => {
         state.loading = false;
         // Remove the item from fetchCartItems array using filter
-        state.cartProductInfo = state.cartProductInfo.filter(item => item.product._id !== action.payload.productId);
+        state.cartProductInfo = state.cartProductInfo.filter(
+          (item) => item.product._id !== action.payload.productId
+        );
       })
       .addCase(RemoveCartProduct.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
       .addCase(AddToWishList.pending, (state) => {
-        state.loading = true
-        state.error = null
+        state.loading = true;
+        state.error = null;
       })
-      .addCase(AddToWishList.fulfilled, (state,action) => {
-        state.loading = false
+      .addCase(AddToWishList.fulfilled, (state, action) => {
+        state.loading = false;
         const { productId, added } = action.payload;
-        console.log(productId, added)
+        console.log(productId, added);
         if (added) {
           // Add the product to the wishlist if it was added
           state.addWishlist.push(productId);
         } else {
           // Remove the product from the wishlist if it was removed
-          state.addWishlist = state.addWishlist.filter((id) => id !== productId);
+          state.addWishlist = state.addWishlist.filter(
+            (id) => id !== productId
+          );
         }
-        localStorage.setItem('wishlist', JSON.stringify(state.addWishlist));
+        localStorage.setItem("wishlist", JSON.stringify(state.addWishlist));
       })
-      .addCase(AddToWishList.rejected, (state,action) => {
-        state.loading = false
+      .addCase(AddToWishList.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.error.message;
       })
       .addCase(fetchWishListItem.pending, (state) => {
-        state.loading = true
-        state.error = null
+        state.loading = true;
+        state.error = null;
       })
-      .addCase(fetchWishListItem.fulfilled, (state,action) => {
-        state.loading = false
-       state.wishListProductInfo = action.payload
+      .addCase(fetchWishListItem.fulfilled, (state, action) => {
+        state.loading = false;
+        state.wishListProductInfo = action.payload;
       })
-      .addCase(fetchWishListItem.rejected, (state,action) => {
-        state.loading = false
+      .addCase(fetchWishListItem.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.error.message;
       })
       .addCase(fetchGetReview.pending, (state) => {
-        state.loading = true
-        state.error = null
+        state.loading = true;
+        state.error = null;
       })
       .addCase(fetchGetReview.fulfilled, (state, action) => {
-        state.loading = false
-        state.allReview = action.payload
+        state.loading = false;
+        state.allReview = action.payload;
       })
       .addCase(fetchGetReview.rejected, (state, action) => {
-        state.loading = false
-        state.error = action.error
+        state.loading = false;
+        state.error = action.error;
       })
       .addCase(fetchEditReview.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchEditReview.fulfilled, (state, action) => {
-        state.loading = false
+        state.loading = false;
         const updatedReview = action.payload; // Assuming the API returns the updated review
 
         state.allReview = state.allReview.map((review) =>
@@ -582,7 +739,9 @@ const ProductSlice = createSlice({
         state.loading = false;
         const deletedReviewId = action.payload;
         // Filter out the deleted review from the array
-        state.allReview = state.allReview.filter((review) => review._id !== deletedReviewId);
+        state.allReview = state.allReview.filter(
+          (review) => review._id !== deletedReviewId
+        );
       })
       .addCase(fetchDeleteReview.rejected, (state, action) => {
         state.loading = false;
@@ -648,7 +807,33 @@ const ProductSlice = createSlice({
         state.loading = false;
         state.allSubcategory = action.payload; // Update the state with fetched categories
       })
+      .addCase(FetchAllOrders.pending, (state, action) => {
+        state.loading = true;
+        state.error = null; 
+      })
+      .addCase(FetchAllOrders.fulfilled, (state, action) => {
+        state.loading = false;
+        state.allOrders = action.payload
+      })
+      .addCase(FetchAllOrders.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message; // Update the state with fetched categories
+      })
+      .addCase(GetSingleOrder.pending, (state, action) => {
+        state.loading = true;
+        state.error = null; 
+      })
+      .addCase(GetSingleOrder.fulfilled, (state, action) => {
+        state.loading = false;
+        state.SingleOrder = action.payload
+      })
+      .addCase(GetSingleOrder.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message; // Update the state with fetched categories
+      })
+      
   },
 });
-export const {clearSubCategoryProduct} = ProductSlice.actions
+export const { clearSubCategoryProduct, saveShippingInfo } =
+  ProductSlice.actions;
 export default ProductSlice.reducer;

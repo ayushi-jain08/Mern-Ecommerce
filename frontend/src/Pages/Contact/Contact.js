@@ -47,7 +47,7 @@ setUserData({...userData, message:""})
             <input type="email" placeholder='your email' name='email' value={userData.email} onChange={handleChange} />
         </div>
        </div>
-            <textarea type="text" className='textarea' placeholder='your email' name='message' value={userData.message} onChange={handleChange} />
+            <textarea type="text" className='textarea' placeholder='your message' name='message' value={userData.message} onChange={handleChange} />
        <br /> 
        <button type='submit' className='contact-btn'>Send message</button>
     </form>

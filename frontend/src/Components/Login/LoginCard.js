@@ -14,8 +14,8 @@ const LoginCard = () => {
   const navigate = useNavigate()
   const selector = useSelector((state) => state.user)
   const {loggedIn, loading, error} = selector
- const [email, setEmail] = useState()
- const [password, setPassword] = useState()
+ const [email, setEmail] = useState('')
+ const [password, setPassword] = useState('')
  
 
    const handleSubmit = (e) => {
@@ -24,6 +24,7 @@ const LoginCard = () => {
       toast.error("Please fill all deatils")
     }else{
       dispatch(fetchLogin({email, password}))
+      navigate("/")
       toast.success("Login successfully")
     }
    }

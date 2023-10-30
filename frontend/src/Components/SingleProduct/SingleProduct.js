@@ -49,7 +49,7 @@ const handleAddToCart = async () => {
     toast.warning('Please log in to add items to your cart.');
     return;
   }
-  dispatch(AddToCart({productId: _id, quantity:count }))
+  await dispatch(AddToCart({productId: _id, quantity:count }))
   await dispatch(fetchCartProduct())
  toast.success('Item successfully added to cart')
 

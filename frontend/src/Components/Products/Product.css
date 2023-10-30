@@ -1,11 +1,11 @@
 .product-page {
   max-width: 1100px;
-  margin: 30px auto;
+  margin: 20px auto;
 }
 .product-page h2 {
   font-size: 30px;
   font-weight: 600;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   position: relative;
 }
 .product-page h2::after {
@@ -86,9 +86,10 @@ color: rgb(211, 205, 205);
 
 /* ====================ALL PRODUCTS======================= */
 .all-product {
-  background: rgb(236, 234, 234);
-  height: 100%;
-  
+  background: rgb(243, 243, 243);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .all-product .sub-products {
   max-width: 1100px;
@@ -96,9 +97,11 @@ color: rgb(211, 205, 205);
   display: flex;
   padding: 15px 5px;
   gap: 10px;
+  margin-bottom: 25px;
 }
 .all-product .sub-products .left {
   flex: 0.2;
+  width: 100%;
 }
 .left .shop{
   width: 100%;
@@ -128,11 +131,11 @@ margin-left: -50px;
 width: 100%;
 }
 .left .shop ul li{
-   margin-left: 0;
+   margin-left: 5px;
    width: 100%;
   list-style: none;
   padding: 7px 10px;
-  font-size: 15px;
+  font-size: 17px;
   cursor: pointer;
 }
 .left .shop ul .selected{
@@ -140,15 +143,51 @@ width: 100%;
   font-weight: 600;
 }
 .left .filter{
-  width: 95%;
-  background-color: white;
+  width: 100%;
+  background: white;
   border-radius: 7px;
   height: fit-content;
-  height: 300px;
-  padding: 15px 5px;
-  margin-top: 15px;
+  height: 230px;
+  box-sizing: border-box;
+  border: 2px solid rgb(233, 227, 227);
+  margin-top: 10px;
 }
-
+.left .filter .main{
+  padding: 5px;
+}
+.left .filter h3{
+  padding: 0px 10px;
+  font-size: 25px;
+  margin-top: 5px;
+  font-family: serif;
+}
+.left .filter ul{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+  margin-top: -15px;
+}
+.left .filter ul li{
+  width: 100%;
+  list-style: none;
+  padding: 7px;
+  font-size: 17px;
+  text-transform: capitalize;
+  margin-top: 5px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-family: 'Times New Roman', Times, serif;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.left .filter ul li:hover{
+background: rgb(24, 24, 54);
+color: white;
+}
+.all-product .sub-products .right {
+  flex: 0.8;
+  width: 900px
+}
 .all-product .right .sort{
 width: 95%;
 background: white;
@@ -171,9 +210,6 @@ gap: 5px;
   font-size: 13px;
   font-weight: 600;
 }
-.all-product .sub-products .right {
-  flex: 0.8;
-}
 .all-product .sub-products .product {
   display: flex;
   align-items: center;
@@ -182,11 +218,12 @@ gap: 5px;
 }
 
 .all-product .pagination{
-  margin-right: 10px;
- float: right;
- width: 100px;
- padding: 5px;
+  position: relative;
+  bottom: 10px;
+ left: 95%;
  width: fit-content;
+ text-align: center;
+ padding: 5px ;
  border: 1px solid rgb(175, 169, 169);
  border-radius: 5px;
  background: rgb(217, 217, 247);

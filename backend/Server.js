@@ -10,6 +10,8 @@ const product = require('./Routes/ProductRoute')
 const review = require("./Routes/Review")
 const category = require("./Routes/Category")
 const subCategory = require("./Routes/SubCategory")
+const order = require('./Routes/Order')
+const payment = require('./Routes/Payment')
 
 const myMiddleware = (req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -30,6 +32,9 @@ app.use("/api",product )
 app.use("/api", review)
 app.use("/api", category)
 app.use("/api", subCategory)
+app.use("/api", payment)
+app.use("/api", order)
+
 
 
 app.listen(process.env.PORT, () => {

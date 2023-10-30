@@ -9,10 +9,10 @@ const ProductPage = () => {
   const productDetail = useSelector((state) => state.products)
   const { allProductInfo} = productDetail
   const featuredProducts = allProductInfo.filter((product) => product.feature === true);
-  console.log(featuredProducts)
+  console.log('featuredProducts', featuredProducts)
 
   useEffect(() => {
-    dispatch(fetchAllProduct({page:'',sort:"",brand:''}))
+    dispatch(fetchAllProduct({page:'',sort:"",brand:'', category:''}))
   },[dispatch])
 
   return (

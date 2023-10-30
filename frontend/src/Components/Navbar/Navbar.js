@@ -4,12 +4,14 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import "./Navbar.css";
-import logo1 from "./../../Images/logo1.png";
+import logo1 from "./../../Images/wix.png"
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "../../ReduxToolkit/Slices/UserSlice";
 import { fetchCartProduct } from "../../ReduxToolkit/Slices/ProductSlice";
+import InventoryIcon from '@mui/icons-material/Inventory';
+
 const Navbar = () => {
   const selector = useSelector((state) => state.user)
   const Product = useSelector((state) => state.products)
@@ -69,10 +71,10 @@ const Navbar = () => {
                   <span style={{ fontSize: 14, marginLeft:2, width:30 }}> Cart</span>
                 </li>
                 <li style={{marginLeft:-25}}>
-                <NavLink to="/register">
-                <AppRegistrationIcon className="icon"/>
+                <NavLink to="/orders">
+                <InventoryIcon className="icon"/>
                 </NavLink>
-                  <span> New User?</span>
+                  <span> My Orders</span>
                 </li>
               </ul>
             </div>

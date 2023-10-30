@@ -2,7 +2,6 @@ const Product = require("../Model/Product")
 const cloudinary = require("cloudinary").v2;
 const User = require("../Model/UserModel")
 
-
 cloudinary.config({
     cloud_name: process.env.NAME,
     api_key:  process.env.KEY,
@@ -55,15 +54,15 @@ const GetProduct = async(req,res) => {
   const startIndex = (page - 1) * perpage
 
   const brandFilter = req.query.brand ? { brand: req.query.brand } : {}
+  const categoryFilter = req.query.category ? { category: req.query.category } : {}
 
   const totalProducts = await Product.countDocuments();
   const totalPages = Math.ceil(totalProducts / perpage);
 
-  let query = Product.find(brandFilter)
+  let query = Product.find({ ...brandFilter, ...categoryFilter })
   .skip(startIndex)
   .limit(perpage);
 
-  
   if (req.query.sort) {
     // Apply sorting if a sorting option is provided
     const sortDirection = req.query.sort === 'desc' ? -1 : 1;
@@ -332,3 +331,4 @@ const GetWishList = async(req,res) => {
     }
 }
 module.exports = {PostProduct, GetProduct, getSingleProduct, PostAddToCart, getCart, UpdateCart, DeleteCartProduct, AddToWishList, GetWishList, UpdateProduct, GetRelatedProuct}
+

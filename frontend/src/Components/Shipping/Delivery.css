@@ -1,0 +1,36 @@
+.icons-shipping{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+.icons-shipping svg{
+    font-size: 30px;
+}
+.icons-shipping .icons-left{
+    display: flex;
+    align-items: center;
+}
+.icons-shipping .icons-center{
+    display: flex;
+    align-items: center;
+}
+.icons-shipping .icons-left .first{
+      height: 0.5px;  
+      width: 400px;
+}
+.icons-shipping .icons-center .second{
+    height: 0.5px;  
+    width: 400px;
+
+}
+.shipping-title{
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+   
+}
+.shipping-title h4 {
+    margin-top: 5px;
+font-size: 17px;
+font-weight: 400;
+}

@@ -5,14 +5,19 @@ import img1 from "../../Images/makeup.jpg"
 import "./Wishlist.css"
 import DeleteSharpIcon from "@mui/icons-material/DeleteSharp";
 import { ToastContainer, toast } from 'react-toastify';
+import { Link, useNavigate } from 'react-router-dom'
 
 const Wishlist = () => {
+  const navigate = useNavigate()
     const dispatch = useDispatch()
     const wishlist = useSelector((state) => state.products)
     const {wishListProductInfo, addWishlist} = wishlist
 const users = useSelector((state) => state.user)
 const {loggedIn} = users
     useEffect(() => {
+      if(!loggedIn){
+        navigate("/login")
+          }
 dispatch(fetchWishListItem())
     },[dispatch])
     console.log("wish",wishListProductInfo)
@@ -51,11 +56,13 @@ dispatch(fetchWishListItem())
       const {images,longTitle, brand, cost, _id} = item.product
       return(
         <>
-       <div className="content">
+       <div className="content" key={_id}>
         <div className="product">
         <img src={images[0]} alt="" width={70} height={70} />
               <div className="details">
-                <p>{longTitle}</p>
+              <Link to={`/product/${_id}`}>
+              <p>{longTitle}</p>
+              </Link>
               </div>
               </div>
               <div className="price">

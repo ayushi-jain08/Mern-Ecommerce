@@ -33,7 +33,11 @@ const Mininav = () => {
               <li>
                 <Link to="/">HOME</Link>
               </li>
-              <li>ABOUT</li>
+              <li>
+                <NavLink to="/about-co"> 
+                ABOUT
+                </NavLink>
+              </li>
               <li>
                 <NavLink to="/contact">CONTACT</NavLink>
               </li>

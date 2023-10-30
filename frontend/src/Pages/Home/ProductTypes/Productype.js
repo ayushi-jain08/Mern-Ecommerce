@@ -20,7 +20,7 @@ const Productype = () => {
       <div className="product-types">
       {slicedAllSubcategory.map((item) => {
         return(
-          <div className="flex">
+          <div className="flex" key={item._id}>
           <div className="content">
           <NavLink to={`/subcategories/${item._id}`}><p>{item.name}</p></NavLink>
             <span>8 items</span>

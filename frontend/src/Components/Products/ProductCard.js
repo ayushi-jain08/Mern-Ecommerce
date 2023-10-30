@@ -27,13 +27,11 @@ if (!allProductInfo) {
   return (
     <>
       {/* <div className="product-card"> */}
-      {allProductInfo.map((item) => {
+      {allProductInfo.map((item, i) => {
          const isAddedToWishlist = addWishlist.includes(item._id);
-
-        console.log(isAddedToWishlist)
         return(
            <>
-            <div className="product-card" key={item._id}>
+            <div className="product-card" key={i}>
             <div className="img">
                 <img src={item.images[0]} alt="" width={150} height={150}/>
             </div>

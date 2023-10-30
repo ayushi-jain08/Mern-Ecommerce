@@ -71,9 +71,16 @@ text-transform: uppercase;
     gap: 5px;
     font-size: 20px;
 }
+.content .delete button{
+    border: none;
+    outline: none;
+}
 .content .delete .del{
     color: red;
-    font-size: 25px;
+    font-size: 30px;
+}
+.content .delete .del:active{
+    transform: scale(1.2);
 }
 .sub-cart .bottom{
     display: flex;
@@ -89,6 +96,10 @@ text-transform: uppercase;
     font-size: 14px;
     border: 0;
     border-radius: 20px;
+}
+.sub-cart .bottom .continue:active{
+    background: rgb(51, 51, 92);
+    transform: scale(1.0777);
 }
 .sub-cart .bottom .clear{
     width: 120px;
@@ -106,14 +117,18 @@ text-transform: uppercase;
     color: gray;
     font-weight: 600;
 }
-.sub-cart .subtotal button{
+.sub-cart .subtotal .shipping-btn{
     width: 270px;
     padding: 10px;
     background: rgb(9, 9, 48);
     color: white;
-    font-size: 14px;
+    font-size: 16px;
     border: 0;
     border-radius: 20px;
+}
+.sub-cart .subtotal .shipping-btn:active{
+    background: rgb(51, 51, 92);
+    transform: scale(1.0777);
 }
 .carts .empty{
     width: 100%;

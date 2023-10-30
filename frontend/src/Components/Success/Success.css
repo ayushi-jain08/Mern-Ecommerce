@@ -1,0 +1,66 @@
+.success-order{
+    max-width: 1150px;
+    margin: 50px auto;
+    display: grid;
+    place-items: center;
+   
+}
+.success-order .order-placed{
+    width: 250px;
+    height: 280px;
+    background: rgb(14, 136, 14);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    animation: order 0.5s ease-in-out;
+}
+.success-order .order-placed .tick{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    text-align: center;
+}
+.success-order .order-placed .tick svg{
+    font-size: 120px;
+    font-weight: 800;
+    color: green;
+}
+.success-order .order-placed h2{
+    font-size: 20px;
+    font-family: serif;
+    color: white;
+    text-align: center;
+    line-height: 25px;
+    font-weight: 500;
+}
+.success-order .order-success-btn{
+margin-top: 15px;
+padding: 12px 30px;
+font-size: 14px;
+background: rgb(5, 5, 44);
+color: white;
+border: none;
+outline: none;
+animation: order 0.5s ease-in-out;
+}
+.success-order .order-success-btn:active{
+    background: rgb(27, 27, 88);
+    transform: scale(1.077);
+}
+@keyframes order {
+    from{
+        transform: translateY(-120%);
+    }
+    to{
+        transform: translateY(0%);
+    }
+}
