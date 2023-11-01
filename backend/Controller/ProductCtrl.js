@@ -9,7 +9,7 @@ cloudinary.config({
   });
 // =============CREATE PRODUCT==================
 const PostProduct = async(req,res) => {
-    const {shortTitle, longTitle, brand, desc, mrp, cost, discount, feature, category}  = req.body;
+    const {shortTitle, longTitle, brand, desc, mrp, cost, discount, feature, category, subcategory}  = req.body;
     if (!req.files || !req.files.img) {
         return res.status(400).json({ message: "Image file is required." });
       }
@@ -31,6 +31,9 @@ try {
       mrp,
       cost,
       discount,
+      feature,
+      category,
+      subcategory,
       images: imageUrls
     })
     console.log(imageUrls);

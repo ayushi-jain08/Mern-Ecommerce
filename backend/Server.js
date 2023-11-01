@@ -12,12 +12,14 @@ const category = require("./Routes/Category")
 const subCategory = require("./Routes/SubCategory")
 const order = require('./Routes/Order')
 const payment = require('./Routes/Payment')
-
+const path = require('path')
 const myMiddleware = (req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type");
     next(); // Call next to pass control to the next middleware
 };
+const __dirnames = path.resolve();
+
 ConnectDb()
 app.use(bodyParser.json());
 app.use(myMiddleware);
@@ -36,7 +38,11 @@ app.use("/api", payment)
 app.use("/api", order)
 
 
+app.use(express.static(path.join(__dirnames, '/frontend/dist')));
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
+})
 app.listen(process.env.PORT, () => {
     console.log("server start")
 })
